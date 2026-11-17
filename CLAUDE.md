@@ -1,18 +1,27 @@
 # finalsite
 
 ## What it is
-TODO: one or two lines. Full vision in docs/vision.md.
+Pink Floyd Archives: unofficial fan site for NIT1101 Assessment 2 (solo). Brief condensed in docs/instructions.md; the brief beats the wireframes.
 
 ## Stack
-TODO
+HTML, Bootstrap 5.3.3 (CDN), one external css/style.css, vanilla JS, PHP 8 (PDO), MySQL. No build step.
+Only Categories/Products are in MySQL (merch shop). Login, fan wall and tours are JS + localStorage.
 
 ## Run / test
-TODO: exact commands.
+- DB (resets data): `mysql --no-defaults -u root < site/sql/pinkfloyd_archives.sql`
+  (`--no-defaults` because ~/.my.cnf sets a root password; never read that file)
+- Server: `php -S localhost:8000 -t site`, then open http://localhost:8000
+- Lint: `php -l site/*.php`, `node --check site/js/*.js`
 
 ## Conventions
-TODO: only things Claude would get wrong without being told.
+- Every page is .php and does `include 'includes/header.php'` / `footer.php`; set `$pageTitle`, `$currentPage`, optional `$pageScript` first.
+- All SQL via prepared statements; ORDER BY direction is whitelisted, never interpolated from input.
+- Escape output with htmlspecialchars (PHP) / textContent (JS).
+- Colours only via the CSS variables in style.css; no red/green pairs.
+- Comment code in plain language: the user must explain every line in the demo.
 
 ## Docs
+- docs/instructions.md: the assignment brief, condensed (checklist)
 - docs/vision.md: why and what
-- docs/requirements.md: what done looks like
 - docs/log.md: session log (append an entry after each task)
+- site/README.md: install/run guide (part of the submission)

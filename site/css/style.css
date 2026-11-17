@@ -1,0 +1,160 @@
+/* =========================================================
+   Pink Floyd Archives: our one external stylesheet
+   Loaded AFTER Bootstrap on every page (see includes/header.php)
+   ========================================================= */
+
+/* ---------- Colour palette (accessibility feature #1) ----------
+   Dark background + near-white text = contrast ratio ~17:1 (WCAG AAA needs 7:1).
+   Accents are amber and sky-blue: readable for red/green colour-blind users,
+   and we never use red vs green to signal meaning. */
+:root {
+    --bg: #0d0d12;
+    --surface: #1a1a24;
+    --surface-2: #242433;
+    --text: #f2f2f2;
+    --muted: #c4c4d0;      /* still ~11:1 on --bg */
+    --accent: #ffd23f;     /* amber */
+    --accent-2: #4cc9f0;   /* sky blue */
+    --border: #3a3a4d;
+    --focus: #ffd23f;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+}
+
+a { color: var(--accent-2); }
+a:hover { color: var(--accent); }
+
+/* Bootstrap's muted text is too dim on a dark background */
+.text-muted, .form-text { color: var(--muted) !important; }
+
+/* ---------- Keyboard accessibility (feature #4) ---------- */
+/* Big, obvious focus ring on anything you can Tab to */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, .album-cover:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    box-shadow: none;
+}
+
+/* Hidden until a keyboard user presses Tab on page load */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 1000;
+    padding: .5rem 1rem;
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    border-radius: .25rem;
+}
+.skip-link:focus { top: 1rem; color: #000; }
+
+/* ---------- Header + nav ---------- */
+.site-header { background: #000; border-bottom: 1px solid var(--border); }
+.brand-name { color: var(--text); font-size: 1.5rem; font-weight: 700; letter-spacing: .02em; }
+.brand-tagline { color: var(--muted); font-size: .9rem; }
+.site-nav { background: var(--surface); }
+.site-nav .nav-link { color: var(--text); padding: .75rem 1rem; }
+.site-nav .nav-link:hover { color: var(--accent); }
+.site-nav .nav-link.active {
+    color: var(--accent);
+    font-weight: 700;
+    border-bottom: 3px solid var(--accent); /* not colour-only: also bold + underline bar */
+}
+
+/* ---------- Buttons ---------- */
+.btn-accent {
+    background: var(--accent);
+    color: #000;
+    border: 1px solid var(--accent);
+    font-weight: 600;
+}
+.btn-accent:hover, .btn-accent:focus { background: #ffe07a; color: #000; }
+
+/* ---------- Cards / panels ---------- */
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
+    padding: 1.5rem;
+}
+.card { background: var(--surface); color: var(--text); border-color: var(--border); }
+
+/* ---------- Tables (dark theme) ---------- */
+.table { --bs-table-bg: var(--surface); --bs-table-color: var(--text); --bs-table-border-color: var(--border); }
+.table thead th { color: var(--accent); text-transform: uppercase; font-size: .8rem; letter-spacing: .05em; }
+.table-striped > tbody > tr:nth-of-type(odd) > * { --bs-table-bg-type: var(--surface-2); color: var(--text); }
+
+/* ---------- Forms ---------- */
+.form-control, .form-select {
+    background: var(--surface-2);
+    color: var(--text);
+    border-color: var(--border);
+}
+.form-control:focus, .form-select:focus { background: var(--surface-2); color: var(--text); }
+.form-control::placeholder { color: #9a9aab; }
+.form-label { font-weight: 600; }
+/* Error messages: amber text + a warning icon, never just "red" */
+.error-msg { color: var(--accent); font-size: .9rem; min-height: 1.2em; }
+.error-msg:not(:empty)::before { content: "⚠ "; }
+.is-invalid { border-color: var(--accent) !important; }
+.success-msg { border-left: 4px solid var(--accent-2); padding: .75rem 1rem; background: var(--surface-2); }
+
+/* ---------- Home ---------- */
+.carousel-item img { height: 420px; object-fit: cover; }
+.carousel-caption { background: rgba(0, 0, 0, .7); border-radius: .5rem; }
+.ratio iframe { border-radius: .75rem; }
+.member-card h3 { color: var(--accent); }
+
+/* ---------- Albums ---------- */
+.album-cover {
+    padding: 0;
+    border: 3px solid transparent;
+    background: none;
+    border-radius: .5rem;
+    overflow: hidden;
+    width: 100%;
+}
+.album-cover img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+.album-cover[aria-expanded="true"] { border-color: var(--accent); }
+.album-cover:hover img { opacity: .85; }
+
+/* ---------- Shop ---------- */
+.category-list .list-group-item { background: var(--surface); color: var(--text); border-color: var(--border); }
+.category-list .list-group-item.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* ---------- About ---------- */
+.avatar {
+    width: 120px; height: 120px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--surface-2); border: 3px solid var(--accent);
+    font-size: 2.5rem; font-weight: 700; color: var(--accent);
+}
+
+/* ---------- Footer ---------- */
+.site-footer { background: #000; border-top: 1px solid var(--border); color: var(--muted); }
+.site-footer h2 { color: var(--text); }
+
+/* ---------- Mobile tweaks (Bootstrap handles most of it via the grid) ---------- */
+@media (max-width: 576px) {
+    .carousel-item img { height: 240px; }
+    .brand-name { font-size: 1.2rem; }
+}
+
+/* ---------- Print stylesheet ----------
+   Black text on white, hide things that make no sense on paper. */
+@media print {
+    body, .panel, .card, .table, .site-footer { background: #fff !important; color: #000 !important; }
+    .table { --bs-table-bg: #fff; --bs-table-color: #000; }
+    .site-nav, .skip-link, #account-area, #read-aloud, .carousel-control-prev,
+    .carousel-control-next, .carousel-indicators, iframe, form, .btn, .no-print { display: none !important; }
+    a { color: #000; text-decoration: underline; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
+    .d-none.print-show { display: block !important; }
+}
