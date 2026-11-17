@@ -16,47 +16,47 @@ The idea: start with a static site, then add JS, Bootstrap responsiveness, and a
 All images, videos, templates and designs must be **original to our group**. Duplicates across groups are rejected.
 
 ## 1. Site structure
-- [ ] At least **6 pages**, all interlinked
-- [ ] Same **nav menu on every page**: users never need the Back button
-- [ ] Each page has **header, nav, main, footer**
-- [ ] **One external CSS file**, linked properly on every page
-- [ ] Supporting files (images, video, css, js) in **separate folders**
+- [x] At least **6 pages**, all interlinked
+- [x] Same **nav menu on every page**: users never need the Back button
+- [x] Each page has **header, nav, main, footer**
+- [x] **One external CSS file**, linked properly on every page
+- [x] Supporting files (images, video, css, js) in **separate folders**
 
 ### Page-specific musts
 **Page 1 (Home)**
-- [ ] Brand logo + tagline
-- [ ] Nav linking to all pages
-- [ ] Image slideshow / carousel (JS or Bootstrap)
-- [ ] Short intro paragraph about the brand
-- [ ] At least one theme-relevant **video**
+- [x] Brand logo + tagline
+- [x] Nav linking to all pages
+- [x] Image slideshow / carousel (JS or Bootstrap)
+- [x] Short intro paragraph about the brand
+- [x] At least one theme-relevant **video**
 
 **Page 2**
-- [ ] Table with **at least 4 rows** of data
-- [ ] Ordered list
-- [ ] External hyperlink to a relevant site
-- [ ] At least one image with alt text
+- [x] Table with **at least 4 rows** of data
+- [x] Ordered list
+- [x] External hyperlink to a relevant site
+- [x] At least one image with alt text
 
 **Page 6 (About)**
-- [ ] Description of the brand / team
-- [ ] At least 3 accessibility features implemented
-- [ ] Evidence of inclusive, respectful language
-- [ ] Acknowledgement of Country (First Nations)
-- [ ] Contact info or social links
+- [x] Description of the brand / team
+- [x] At least 3 accessibility features implemented
+- [x] Evidence of inclusive, respectful language
+- [x] Acknowledgement of Country (First Nations)
+- [x] Contact info or social links
 
 ### Must appear somewhere on the site (any page that fits)
-- [ ] Relevant picture and video
-- [ ] Ordered **and** unordered lists
-- [ ] Tables
-- [ ] **Sign-in and sign-up forms**, plus a **contact / feedback / complaint form**, all with **JavaScript validation**
-- [ ] Links to relevant external pages
-- [ ] Attractive descriptive paragraph with UI elements
+- [x] Relevant picture and video
+- [x] Ordered **and** unordered lists
+- [x] Tables
+- [x] **Sign-in and sign-up forms**, plus a **contact / feedback / complaint form**, all with **JavaScript validation**
+- [x] Links to relevant external pages
+- [x] Attractive descriptive paragraph with UI elements
 
 ## 2. Responsive (Bootstrap)
-- [ ] Works on **mobile, tablet, and print** using Bootstrap (Session 4)
+- [x] Works on **mobile, tablet, and print** using Bootstrap (Session 4)
 
 ## 3. JavaScript interactivity (Session 5)
-- [ ] At least **3 event types** (e.g. `click`, `submit`, `keydown`)
-- [ ] At least **2 logic rules** (e.g. show/hide, toggle, calculator, dynamic content update)
+- [x] At least **3 event types** (e.g. `click`, `submit`, `keydown`)
+- [x] At least **2 logic rules** (e.g. show/hide, toggle, calculator, dynamic content update)
 
 ## 4. Accessibility & inclusion
 At least **3 features in total**: **2 or more technical** (1–4) **and 1 or more inclusion** (5–6).
@@ -78,16 +78,16 @@ Example acknowledgement: *"We acknowledge the Traditional Owners of the land on 
 Categories(categoryID PK, categoryName)
 Products(productID PK, categoryID, productCode, productName, listPrice)
 ```
-- [ ] **3 categories**, with sample product data in each
-- [ ] Connect the DB to a PHP page on our site
+- [x] **3 categories**, with sample product data in each
+- [x] Connect the DB to a PHP page on our site
 
 ### Required operations, with a UI on one suitable page
-- [ ] **SELECT**: show products (for a chosen category)
-- [ ] **INSERT**: "Add" form adds a new product
-- [ ] **DELETE**: Delete button per row
-- [ ] **UPDATE**: Modify button hides the list and shows an edit form (name + price), then a Save button
-- [ ] **ORDER BY**: two buttons, sort A→Z and Z→A
-- [ ] Each sub-screen has a "View list" link back
+- [x] **SELECT**: show products (for a chosen category)
+- [x] **INSERT**: "Add" form adds a new product
+- [x] **DELETE**: Delete button per row
+- [x] **UPDATE**: Modify button hides the list and shows an edit form (name + price), then a Save button
+- [x] **ORDER BY**: two buttons, sort A→Z and Z→A
+- [x] Each sub-screen has a "View list" link back
 
 ### How the case study looks (the 8 screenshots, summarised)
 ```
@@ -108,12 +108,12 @@ The look/CSS and data must be our own (Pink Floyd themed), not sneakers.
 for loop · arrays · nested if/else · PHP `include` · a stack or queue · input validation · Bootstrap · JavaScript · PHP · CSS · HTML · SQL
 
 ## 6. What to submit
-- [ ] Approved wireframes ✅
-- [ ] **A4 cover page**: course code, course name, assignment title, student IDs, signatures
-- [ ] **Contribution report + meeting minutes**
-- [ ] **Documentation**: install/usage instructions, source code, **test report with test cases**, acknowledgement of external sources
+- [x] Approved wireframes ✅
+- [ ] **A4 cover page**: course code, course name, assignment title, student IDs, signatures → template: docs/cover-page.html (fill in brackets, print to PDF, sign)
+- [ ] **Contribution report + meeting minutes** → draft: docs/contribution.md (solo statement + work log)
+- [ ] **Documentation**: install/usage instructions, source code, **test report with test cases**, acknowledgement of external sources → install guide (site/README.md) and test report (docs/test-report.md) done; acknowledgements in docs/acknowledgements.md
 - [ ] **Zip** of the whole site folder (PHP, CSS, images, videos)
-- [ ] Code includes embedded PHP, HTML, Bootstrap, JS, CSS, SQL
+- [x] Code includes embedded PHP, HTML, Bootstrap, JS, CSS, SQL
 - [ ] All members' full names + student IDs shown clearly
 
 ## 7. Marking criteria
@@ -130,8 +130,8 @@ Most criteria are judged in the **individual demo**. AI use is allowed for anyth
 
 ## 8. Wireframe vs brief: gaps to resolve
 Our wireframes: Home · Albums · Tours · Signup · Fan Wall · About.
-- [ ] **Home** has no **video** and shows one image rather than a **carousel**
-- [ ] **Page 2 (Albums)** has an ordered list and images, but **no table (4+ rows)** and **no external link**
-- [ ] The required **`Categories` / `Products`** tables need a home. Options: albums as products (categories = era or format), a merch shop, or tour tickets. Tours and fan wall can use extra tables.
-- [ ] **Sign-in** form and a **contact/feedback** form are not wireframed (only Signup)
-- [ ] Brief says **group of 2**: confirm partner and who does what
+- [x] **Home** has no **video** and shows one image rather than a **carousel**
+- [x] **Page 2 (Albums)** has an ordered list and images, but **no table (4+ rows)** and **no external link**
+- [x] The required **`Categories` / `Products`** tables need a home. Options: albums as products (categories = era or format), a merch shop, or tour tickets. Tours and fan wall can use extra tables.
+- [x] **Sign-in** form and a **contact/feedback** form are not wireframed (only Signup)
+- [x] Brief says **group of 2**: confirm partner and who does what → solo (odd class size), confirmed 2026-11-18

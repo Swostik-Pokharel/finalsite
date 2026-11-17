@@ -70,7 +70,9 @@ const shareStatus = document.getElementById('share-status');
 
 // EVENT: click
 shareBtn.addEventListener('click', function () {
-    const url = window.location.origin + '/index.php';
+    // Build the link relative to THIS page, so it also works when the site sits in a
+    // subfolder (e.g. XAMPP: localhost/finalsite/index.php)
+    const url = new URL('index.php', window.location.href).href;
     // LOGIC: use the phone/OS share sheet if the browser has one, otherwise copy the link
     if (navigator.share) {
         navigator.share({ title: 'Pink Floyd Archives', url: url }).catch(function () { /* user cancelled */ });

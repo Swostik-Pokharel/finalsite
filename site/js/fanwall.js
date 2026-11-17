@@ -42,8 +42,18 @@ function renderWall() {
     for (let i = stack.length - 1; i >= 0; i--) {
         const post = stack[i];
         const row = document.createElement('tr');
-        // Build cells with textContent so a visitor can't inject HTML into the page
-        [post.rating + '/5', post.song, post.review, post.author].forEach(function (value) {
+
+        // Rating cell: stars for looks (hidden from screen readers) + "4/5" as text
+        const ratingCell = document.createElement('td');
+        const stars = document.createElement('span');
+        stars.className = 'stars';
+        stars.setAttribute('aria-hidden', 'true');
+        stars.textContent = '★'.repeat(post.rating) + '☆'.repeat(5 - post.rating) + ' ';
+        ratingCell.append(stars, post.rating + '/5');
+        row.appendChild(ratingCell);
+
+        // Other cells built with textContent so a visitor can't inject HTML into the page
+        [post.song, post.review, post.author].forEach(function (value) {
             const cell = document.createElement('td');
             cell.textContent = value;
             row.appendChild(cell);

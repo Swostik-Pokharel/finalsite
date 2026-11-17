@@ -4,7 +4,7 @@ An unofficial Pink Floyd fan site (NIT1101 Assessment 2). HTML, CSS, Bootstrap 5
 
 ## Requirements
 - PHP 8+ with `pdo_mysql`, and MySQL 8+ (or XAMPP, which includes both)
-- An internet connection (Bootstrap and the YouTube video load from the web)
+- An internet connection only for the embedded YouTube video (Bootstrap is included in `vendor/`)
 
 ## 1. Create the database
 ```bash
@@ -42,5 +42,5 @@ index.php albums.php tours.php fanwall.php about.php account.php   pages
 shop.php shop_add_form.php shop_add.php shop_edit_form.php
 shop_edit.php shop_delete.php                                      database pages
 includes/   header.php footer.php database.php product_validation.php
-css/style.css   js/*.js   images/   sql/pinkfloyd_archives.sql
+css/style.css   js/*.js   images/   sql/pinkfloyd_archives.sql   vendor/bootstrap/
 ```

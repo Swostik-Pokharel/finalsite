@@ -18,6 +18,13 @@ php -S localhost:8000 -t site
 ```
 Open **http://localhost:8000**. Using XAMPP instead? See [`site/README.md`](site/README.md).
 
+### Run the tests
+```bash
+bash tests/server-tests.sh      # 15 PHP + MySQL tests (curl)
+node tests/browser-tests.mjs    # 51 browser tests in headless Chrome (Node 22+, no npm install)
+```
+Results and the manual checklist are in [`docs/test-report.md`](docs/test-report.md).
+
 ---
 
 ## What's inside
@@ -63,8 +70,14 @@ finalsite/
 │   ├── js/                   one script per page + main.js for every page
 │   ├── images/
 │   └── sql/pinkfloyd_archives.sql
+├── tests/                    automated server + browser tests
 ├── docs/
 │   ├── instructions.md       the assignment brief as a checklist
+│   ├── test-report.md        test cases and results
+│   ├── report-draft.md       written report (draft)
+│   ├── acknowledgements.md   sources, licences, AI use
+│   ├── contribution.md       contribution statement + work log
+│   ├── cover-page.html       printable A4 cover page
 │   ├── vision.md
 │   └── log.md                build log, session by session
 └── Project-wireframe.zip     approved wireframes

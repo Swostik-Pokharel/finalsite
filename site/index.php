@@ -59,9 +59,9 @@ include 'includes/header.php';
                 track on the <a href="fanwall.php">fan wall</a>, or pick up something from the
                 <a href="shop.php">merch shop</a>.</p>
             <p class="mb-0">
-                <span class="badge text-bg-warning">15 studio albums</span>
-                <span class="badge text-bg-info">250M+ records sold</span>
-                <span class="badge text-bg-light">Rock and Roll Hall of Fame, 1996</span>
+                <span class="tag">15 studio albums</span>
+                <span class="tag">250M+ records sold</span>
+                <span class="tag">Rock and Roll Hall of Fame, 1996</span>
             </p>
         </div>
     </section>
@@ -75,6 +75,9 @@ include 'includes/header.php';
                         title="Pink Floyd music video (YouTube)"
                         allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
+            <p class="note mt-3 mb-0">New to the band? <em>The Dark Side of the Moon</em> is the classic starting
+                point: play it start to finish, ideally with headphones. Then explore the
+                <a href="albums.php#tracks-dsotm">full tracklist</a>.</p>
         </div>
     </section>
 </div>

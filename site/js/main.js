@@ -6,8 +6,10 @@
 
 // ---------- 1. Read aloud ----------
 const readBtn = document.getElementById('read-aloud');
+let isReading = false; // our own on/off flag (speechSynthesis.speaking can flicker between sentences)
 
 function stopReading() {
+    isReading = false;
     window.speechSynthesis.cancel();
     readBtn.setAttribute('aria-pressed', 'false');
     readBtn.textContent = '🔊 Read page aloud';
@@ -17,19 +19,29 @@ if ('speechSynthesis' in window) {
     // EVENT: click
     readBtn.addEventListener('click', function () {
         // LOGIC: toggle. If already speaking, stop; otherwise start.
-        if (window.speechSynthesis.speaking) {
+        if (isReading) {
             stopReading();
         } else {
             // If the visitor highlighted some text, read just that; otherwise read the main content.
             const selected = window.getSelection().toString().trim();
             const text = selected !== '' ? selected : document.getElementById('main').innerText;
 
-            const speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'en-AU';
-            speech.rate = 1;
-            speech.onend = stopReading; // reset the button when it finishes by itself
-
-            window.speechSynthesis.speak(speech);
+            // Chrome cuts off one long utterance after ~15 seconds, so we split the
+            // text into sentences and queue them one after another.
+            // match() grabs runs of text up to and including . ! or ? (or a line break).
+            const sentences = (text.match(/[^.!?\n]+[.!?]*/g) || []).filter(function (s) {
+                return s.trim() !== '';
+            });
+            for (let i = 0; i < sentences.length; i++) {
+                const speech = new SpeechSynthesisUtterance(sentences[i]);
+                speech.lang = 'en-AU';
+                speech.rate = 1;
+                if (i === sentences.length - 1) {
+                    speech.onend = stopReading; // reset the button after the LAST sentence
+                }
+                window.speechSynthesis.speak(speech); // speak() adds to a queue
+            }
+            isReading = true;
             readBtn.setAttribute('aria-pressed', 'true');
             readBtn.textContent = '⏹ Stop reading';
         }
@@ -37,7 +49,7 @@ if ('speechSynthesis' in window) {
 
     // EVENT: keydown. The Escape key stops reading from anywhere on the page.
     document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && window.speechSynthesis.speaking) {
+        if (event.key === 'Escape' && isReading) {
             stopReading();
         }
     });
@@ -62,7 +74,7 @@ if (signedInName) {
 
     const logoutBtn = document.createElement('button');
     logoutBtn.type = 'button';
-    logoutBtn.className = 'btn btn-outline-light btn-sm';
+    logoutBtn.className = 'btn btn-ghost btn-sm';
     logoutBtn.textContent = 'Log out';
     logoutBtn.addEventListener('click', function () {
         localStorage.removeItem('pfa_signed_in');

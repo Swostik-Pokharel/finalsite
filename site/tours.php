@@ -24,6 +24,8 @@ include 'includes/header.php';
             </select>
         </div>
     </form>
+    <p class="note mt-3 mb-0">Not sure where to start? Try <strong>1980</strong> for The Wall tour, famous for
+        building a real wall across the stage during the show.</p>
 </div>
 
 <!-- aria-live: screen readers announce the new details when they appear -->

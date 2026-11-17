@@ -21,10 +21,19 @@ $old = [
 
 $errors = validateProduct($old['code'], $old['name'], $old['price']);
 
-// Category must be a real one
+// Category must be a whole number AND exist in the Categories table.
+// (Without the second check, a faked form value like 99 would break the
+// foreign key and crash the INSERT.)
 if (!$old['category_id']) {
     array_push($errors, 'Please choose a category.');
     $old['category_id'] = 1;
+} else {
+    $check = $db->prepare('SELECT COUNT(*) FROM Categories WHERE categoryID = :id');
+    $check->execute([':id' => $old['category_id']]);
+    if ($check->fetchColumn() == 0) {
+        array_push($errors, 'That category does not exist.');
+        $old['category_id'] = 1;
+    }
 }
 
 // Code must not already exist (the column is UNIQUE, but a friendly message beats an SQL error)

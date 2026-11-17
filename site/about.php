@@ -33,8 +33,9 @@ include 'includes/header.php';
     <h2 id="a11y-heading" class="h4">Accessibility and inclusion</h2>
     <p>Everyone should be able to enjoy this site. Here is what we have built in:</p>
     <ul>
-        <li><strong>High-contrast colours:</strong> light text on a dark background, with amber and blue accents
-            and no red/green colour pairs, so the site stays readable for people with colour blindness.</li>
+        <li><strong>High-contrast colours:</strong> light text and a pink accent on a near-black background. Body text is
+            about 16:1 contrast and every colour pair passes WCAG AA (4.5:1 or more). Colour is never the only signal: errors also show a ⚠ icon and text,
+            and the current page is underlined, so the site works for people with colour blindness.</li>
         <li><strong>Read aloud:</strong> the "Read page aloud" button in the header reads the page (or any text
             you highlight) using your browser's text-to-speech. Press Esc to stop.</li>
         <li><strong>Alt text:</strong> every image has a description for screen readers, and the video has a title.</li>
@@ -102,7 +103,7 @@ include 'includes/header.php';
             </ul>
             <p>Want to help the archive grow? Buy something from the <a href="shop.php">merch shop</a> or share
                 the site with a friend.</p>
-            <button type="button" id="share-btn" class="btn btn-outline-light">Share this site</button>
+            <button type="button" id="share-btn" class="btn btn-ghost">Share this site</button>
             <p id="share-status" class="small mt-2 mb-0" role="status"></p>
         </div>
     </section>

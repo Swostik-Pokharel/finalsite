@@ -17,7 +17,14 @@ $old = [
     'price'       => trim($_POST['price'] ?? ''),
 ];
 
-if (!$old['product_id']) {
+// The product must be a whole number AND still exist (someone may have deleted it meanwhile)
+$exists = false;
+if ($old['product_id']) {
+    $check = $db->prepare('SELECT COUNT(*) FROM Products WHERE productID = :id');
+    $check->execute([':id' => $old['product_id']]);
+    $exists = $check->fetchColumn() > 0;
+}
+if (!$exists) {
     header('Location: shop.php');
     exit();
 }

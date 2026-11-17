@@ -1,42 +1,70 @@
 /* =========================================================
    Pink Floyd Archives: our one external stylesheet
-   Loaded AFTER Bootstrap on every page (see includes/header.php)
+   Style carried over from the original Pink_Floyd site:
+   Georgia serif text, a pink accent, uppercase letter-spaced
+   labels, and the Dark Side of the Moon prism strip.
+   Loaded AFTER Bootstrap on every page, so these rules win.
    ========================================================= */
 
-/* ---------- Colour palette (accessibility feature #1) ----------
-   Dark background + near-white text = contrast ratio ~17:1 (WCAG AAA needs 7:1).
-   Accents are amber and sky-blue: readable for red/green colour-blind users,
-   and we never use red vs green to signal meaning. */
+/* ---------- Theme ---------- */
 :root {
-    --bg: #0d0d12;
-    --surface: #1a1a24;
-    --surface-2: #242433;
-    --text: #f2f2f2;
-    --muted: #c4c4d0;      /* still ~11:1 on --bg */
-    --accent: #ffd23f;     /* amber */
-    --accent-2: #4cc9f0;   /* sky blue */
-    --border: #3a3a4d;
-    --focus: #ffd23f;
+    --bg: #0b0b10;
+    --surface: #14141c;
+    --surface-2: #1d1d28;
+    --line: #2a2a36;
+    --text: #e6e6ea;      /* 15.8:1 contrast on --bg (WCAG AAA) */
+    --muted: #9a9aa8;     /* 7.1:1 on --bg, 6.0:1 on --surface-2 (WCAG AA) */
+    --accent: #ff5fa2;    /* pink: 6.9:1 on --bg, 5.9:1 on --surface-2 (WCAG AA) */
+    --accent-soft: #ff8fc0;
+    --sans: Arial, Helvetica, sans-serif;
+    --serif: Georgia, "Times New Roman", serif;
+    /* The prism strip is decoration only: it never carries meaning */
+    --prism: linear-gradient(90deg, #ff3b3b, #ff9f1c, #ffe600, #2ecc71, #1e90ff, #8e44ff);
 }
 
+/* ---------- Base ---------- */
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6;
+    font-family: var(--serif);
+    line-height: 1.7;
 }
 
-a { color: var(--accent-2); }
-a:hover { color: var(--accent); }
+a { color: var(--accent); }
+a:hover { color: var(--accent-soft); }
+b, strong { color: #fff; }
 
-/* Bootstrap's muted text is too dim on a dark background */
-.text-muted, .form-text { color: var(--muted) !important; }
+/* Bootstrap's muted text is too dim on our background */
+.text-muted, .form-text, .note { color: var(--muted) !important; }
+.note { font-size: .9rem; }
 
-/* ---------- Keyboard accessibility (feature #4) ---------- */
+/* ---------- Headings ---------- */
+main h1 {
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+main h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-weight: normal;
+    font-size: 1.5rem;
+    letter-spacing: .08em;
+    border-left: 4px solid var(--accent);
+    padding-left: .75rem;
+}
+
+main h3 { font-size: 1.15rem; color: #fff; }
+
+/* ---------- Keyboard accessibility ---------- */
 /* Big, obvious focus ring on anything you can Tab to */
 a:focus-visible, button:focus-visible, input:focus-visible,
-select:focus-visible, textarea:focus-visible, .album-cover:focus-visible {
-    outline: 3px solid var(--focus);
+select:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--accent);
     outline-offset: 3px;
     box-shadow: none;
 }
@@ -50,111 +78,313 @@ select:focus-visible, textarea:focus-visible, .album-cover:focus-visible {
     padding: .5rem 1rem;
     background: var(--accent);
     color: #000;
+    font-family: var(--sans);
     font-weight: 700;
-    border-radius: .25rem;
+    border-radius: 4px;
 }
 .skip-link:focus { top: 1rem; color: #000; }
 
-/* ---------- Header + nav ---------- */
-.site-header { background: #000; border-bottom: 1px solid var(--border); }
-.brand-name { color: var(--text); font-size: 1.5rem; font-weight: 700; letter-spacing: .02em; }
-.brand-tagline { color: var(--muted); font-size: .9rem; }
-.site-nav { background: var(--surface); }
-.site-nav .nav-link { color: var(--text); padding: .75rem 1rem; }
+/* ---------- Header ---------- */
+.site-header {
+    border-bottom: 4px solid;
+    border-image: var(--prism) 1;   /* the rainbow strip */
+}
+
+.top-bar { background: #000; font-family: var(--sans); font-size: .85rem; }
+
+.brand-block {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+}
+.brand {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+    color: var(--text);
+    text-decoration: none;
+}
+.brand:hover { color: #fff; }
+.brand-name {
+    font-size: 2.6rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+.brand-tagline {
+    color: var(--muted);
+    font-style: italic;
+    margin: .5rem 0 0;
+}
+
+/* ---------- Nav ---------- */
+.site-nav { background: var(--surface); padding: 0; }
+.site-nav .nav-link {
+    color: var(--muted);
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-size: .9rem;
+    padding: 1rem 1.1rem !important;
+}
 .site-nav .nav-link:hover { color: var(--accent); }
 .site-nav .nav-link.active {
     color: var(--accent);
-    font-weight: 700;
-    border-bottom: 3px solid var(--accent); /* not colour-only: also bold + underline bar */
+    box-shadow: inset 0 -3px 0 var(--accent); /* underline bar, so it's not colour alone */
+}
+.navbar-toggler {
+    color: var(--text);
+    border: 1px solid var(--line);
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-size: .85rem;
+    margin: .5rem 0;
 }
 
+/* ---------- Main ---------- */
+/* Same width for main content and footer so their edges line up */
+main.container, .site-footer .container { max-width: 1000px; }
+
+main img { border-radius: 6px; }
+
 /* ---------- Buttons ---------- */
+.btn {
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    border-radius: 4px;
+}
 .btn-accent {
     background: var(--accent);
     color: #000;
     border: 1px solid var(--accent);
-    font-weight: 600;
+    padding: .6rem 1.5rem;
 }
-.btn-accent:hover, .btn-accent:focus { background: #ffe07a; color: #000; }
+.btn-sm.btn-accent { padding: .25rem .75rem; }
+.btn-accent:hover, .btn-accent:focus { background: var(--accent-soft); border-color: var(--accent-soft); color: #000; }
+.btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+}
+.btn-ghost:hover, .btn-ghost:focus { color: var(--accent); border-color: var(--accent); }
 
-/* ---------- Cards / panels ---------- */
+/* Small labels (e.g. "Sorted A→Z", the facts on the home page) */
+.tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: .15rem .5rem;
+    margin: 0 .25rem .25rem 0;
+    vertical-align: middle;
+}
+
+/* ---------- Boxes ---------- */
 .panel {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: .75rem;
-    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
 }
-.card { background: var(--surface); color: var(--text); border-color: var(--border); }
+.panel > h2:first-child { margin-top: 0; }
+.card { background: var(--surface); color: var(--text); border-color: var(--line); border-radius: 6px; }
 
-/* ---------- Tables (dark theme) ---------- */
-.table { --bs-table-bg: var(--surface); --bs-table-color: var(--text); --bs-table-border-color: var(--border); }
-.table thead th { color: var(--accent); text-transform: uppercase; font-size: .8rem; letter-spacing: .05em; }
-.table-striped > tbody > tr:nth-of-type(odd) > * { --bs-table-bg-type: var(--surface-2); color: var(--text); }
+/* ---------- Lists (like the original: dark box, pink markers) ---------- */
+main ol, main ul:not(.list-unstyled) {
+    background: var(--surface);
+    padding: 1rem 1rem 1rem 2.5rem;
+    border-radius: 6px;
+}
+.panel ol, .panel ul:not(.list-unstyled) { background: var(--surface-2); }
+main li { margin: .3rem 0; }
+main li::marker { color: var(--accent); }
+
+/* ---------- Tables ---------- */
+.table {
+    --bs-table-bg: var(--surface);
+    --bs-table-color: var(--text);
+    --bs-table-border-color: var(--line);
+    --bs-table-hover-bg: var(--surface-2);
+    /* Bootstrap gives striped/hover rows their own (dark) text colour; force ours */
+    --bs-table-striped-bg: var(--surface-2);
+    --bs-table-striped-color: var(--text);
+    --bs-table-hover-color: var(--text);
+    --bs-table-active-color: var(--text);
+}
+.table th, .table td { padding: .75rem 1rem; }
+.table thead th {
+    color: var(--accent);
+    font-family: var(--sans);
+    text-transform: uppercase;
+    font-size: .8rem;
+    letter-spacing: .1em;
+}
+.table tbody tr:hover > * { --bs-table-bg-state: var(--surface-2); }
+.table caption { color: var(--muted); caption-side: bottom; font-size: .9rem; }
 
 /* ---------- Forms ---------- */
-.form-control, .form-select {
-    background: var(--surface-2);
+.form-label {
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .8rem;
     color: var(--text);
-    border-color: var(--border);
 }
-.form-control:focus, .form-select:focus { background: var(--surface-2); color: var(--text); }
-.form-control::placeholder { color: #9a9aab; }
-.form-label { font-weight: 600; }
-/* Error messages: amber text + a warning icon, never just "red" */
-.error-msg { color: var(--accent); font-size: .9rem; min-height: 1.2em; }
+.form-control, .form-select {
+    background-color: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: inherit;
+}
+.form-control:focus, .form-select:focus {
+    background-color: var(--bg);
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: none;
+}
+.form-control::placeholder { color: #7d7d8c; }
+.form-select:disabled { background-color: var(--surface-2); color: var(--muted); }
+/* White dropdown arrow so it shows on the dark field */
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e6e6ea' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+.form-check-input { accent-color: var(--accent); }
+.form-check-input:checked { background-color: var(--accent); border-color: var(--accent); }
+
+/* Errors: a warning icon + text + border, so they never rely on colour alone */
+.error-msg { color: var(--accent-soft); font-size: .9rem; min-height: 1.2em; font-family: var(--sans); }
 .error-msg:not(:empty)::before { content: "⚠ "; }
-.is-invalid { border-color: var(--accent) !important; }
-.success-msg { border-left: 4px solid var(--accent-2); padding: .75rem 1rem; background: var(--surface-2); }
+.is-invalid { border-color: var(--accent) !important; border-width: 2px !important; }
+.success-msg {
+    border-left: 4px solid var(--accent);
+    padding: .75rem 1rem;
+    background: var(--surface-2);
+    border-radius: 0 6px 6px 0;
+}
 
 /* ---------- Home ---------- */
-.carousel-item img { height: 420px; object-fit: cover; }
-.carousel-caption { background: rgba(0, 0, 0, .7); border-radius: .5rem; }
-.ratio iframe { border-radius: .75rem; }
-.member-card h3 { color: var(--accent); }
+.carousel-inner { border-radius: 6px; }
+.carousel-item img { height: 420px; object-fit: cover; border-radius: 0; }
+.carousel-caption {
+    bottom: 2.75rem;               /* sit above the slide indicators */
+    background: rgba(0, 0, 0, .75);
+    border-radius: 4px;
+    padding: .5rem 1rem;
+}
+.carousel-caption h2 {
+    color: #fff;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+.ratio iframe { border-radius: 6px; }
+.member-card h3 { color: var(--accent); font-weight: normal; }
 
 /* ---------- Albums ---------- */
 .album-cover {
     padding: 0;
     border: 3px solid transparent;
     background: none;
-    border-radius: .5rem;
+    border-radius: 6px;
     overflow: hidden;
     width: 100%;
 }
-.album-cover img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+.album-cover img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-radius: 0; }
 .album-cover[aria-expanded="true"] { border-color: var(--accent); }
 .album-cover:hover img { opacity: .85; }
 
 /* ---------- Shop ---------- */
-.category-list .list-group-item { background: var(--surface); color: var(--text); border-color: var(--border); }
-.category-list .list-group-item.active { background: var(--accent); color: #000; border-color: var(--accent); }
+.category-list .list-group-item {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--line);
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .85rem;
+}
+.category-list .list-group-item:hover { color: var(--accent); }
+.category-list .list-group-item.active {
+    background: var(--surface-2);
+    color: var(--accent);
+    border-color: var(--line);
+    border-left: 4px solid var(--accent);
+}
 
 /* ---------- About ---------- */
 .avatar {
     width: 120px; height: 120px; border-radius: 50%;
     display: grid; place-items: center;
     background: var(--surface-2); border: 3px solid var(--accent);
-    font-size: 2.5rem; font-weight: 700; color: var(--accent);
+    font-size: 2.5rem; color: var(--accent);
 }
 
 /* ---------- Footer ---------- */
-.site-footer { background: #000; border-top: 1px solid var(--border); color: var(--muted); }
-.site-footer h2 { color: var(--text); }
+.site-footer {
+    color: var(--muted);
+    font-size: .9rem;
+    border-top: 4px solid;
+    border-image: var(--prism) 1;   /* matching strip at the bottom */
+}
+.site-footer h2 {
+    color: var(--accent);
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-size: .85rem;
+}
+.site-footer a { text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
 
-/* ---------- Mobile tweaks (Bootstrap handles most of it via the grid) ---------- */
+/* ---------- Small screens (Bootstrap's grid does most of the work) ---------- */
 @media (max-width: 576px) {
+    .brand-name { font-size: 1.6rem; letter-spacing: .15em; }
+    main h1 { font-size: 1.5rem; }
     .carousel-item img { height: 240px; }
-    .brand-name { font-size: 1.2rem; }
 }
 
 /* ---------- Print stylesheet ----------
-   Black text on white, hide things that make no sense on paper. */
+   Black on white, and hide things that make no sense on paper. */
 @media print {
-    body, .panel, .card, .table, .site-footer { background: #fff !important; color: #000 !important; }
-    .table { --bs-table-bg: #fff; --bs-table-color: #000; }
-    .site-nav, .skip-link, #account-area, #read-aloud, .carousel-control-prev,
-    .carousel-control-next, .carousel-indicators, iframe, form, .btn, .no-print { display: none !important; }
+    body, .panel, .card, .table, .site-footer, main ol, main ul { background: #fff !important; color: #000 !important; }
+    .table {
+        --bs-table-bg: #fff; --bs-table-color: #000;
+        --bs-table-striped-bg: #fff; --bs-table-striped-color: #000;
+    }
+    .table > :not(caption) > * > * { background: #fff !important; color: #000 !important; }
+    .brand, .brand-name, .brand-tagline { color: #000 !important; }
+    .category-list .list-group-item { background: #fff !important; color: #000 !important; border-color: #999 !important; }
+    main h2, .table thead th, .site-footer h2 { color: #000 !important; border-color: #000 !important; }
+    .site-nav, .top-bar, .skip-link, .carousel-control-prev, .carousel-control-next,
+    .carousel-indicators, iframe, form, .btn, .no-print { display: none !important; }
     a { color: #000; text-decoration: underline; }
     a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
-    .d-none.print-show { display: block !important; }
 }
+
+/* Shop row buttons: side by side on wide screens, stacked on phones.
+   (d-none d-sm-table-cell on the Code column hides it below 576px) */
+.actions { text-align: right; white-space: nowrap; }
+@media (max-width: 576px) {
+    .actions { white-space: normal; }
+    .actions form, .actions a { display: block !important; margin-bottom: .35rem; }
+    .actions .btn { width: 100%; }
+}
+
+/* Fan wall rating stars (decorative; the "4/5" text carries the meaning) */
+.stars { color: var(--accent); letter-spacing: .1em; white-space: nowrap; }
+
+/* Bootstrap's own invalid styling uses a red icon and red label text; switch it to
+   our theme (our ⚠ message under the field already explains the problem) */
+.form-control.is-invalid, .was-validated .form-control:invalid { background-image: none; padding-right: .75rem; }
+.form-check-input.is-invalid ~ .form-check-label { color: var(--accent-soft); }
+.form-check-input.is-invalid { border-color: var(--accent); }

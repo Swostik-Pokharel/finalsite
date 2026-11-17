@@ -92,15 +92,15 @@ include 'includes/header.php';
     <section class="col-md-9" aria-labelledby="products-heading">
         <h2 id="products-heading" class="h4">
             <?php echo htmlspecialchars($category['categoryName']); ?>
-            <?php if ($sort === 'asc'): ?><span class="badge text-bg-info ms-2">Sorted A→Z</span><?php endif; ?>
-            <?php if ($sort === 'desc'): ?><span class="badge text-bg-info ms-2">Sorted Z→A</span><?php endif; ?>
+            <?php if ($sort === 'asc'): ?><span class="tag ms-2">Sorted A→Z</span><?php endif; ?>
+            <?php if ($sort === 'desc'): ?><span class="tag ms-2">Sorted Z→A</span><?php endif; ?>
         </h2>
 
         <div class="table-responsive">
             <table class="table table-striped align-middle">
                 <thead>
                 <tr>
-                    <th scope="col">Code</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Code</th>
                     <th scope="col">Name</th>
                     <th scope="col" class="text-end">Price</th>
                     <th scope="col"><span class="visually-hidden">Actions</span></th>
@@ -114,15 +114,15 @@ include 'includes/header.php';
                 <?php for ($i = 0; $i < count($products); $i++): ?>
                     <?php $product = $products[$i]; ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($product['productCode']); ?></td>
+                        <td class="d-none d-sm-table-cell"><?php echo htmlspecialchars($product['productCode']); ?></td>
                         <td><?php echo htmlspecialchars($product['productName']); ?></td>
                         <td class="text-end">$<?php echo number_format($product['listPrice'], 2); ?></td>
-                        <td class="text-end text-nowrap">
+                        <td class="actions">
                             <!-- DELETE uses a POST form (not a link) so a page visit or web crawler can't delete things -->
                             <form action="shop_delete.php" method="post" class="d-inline delete-form">
                                 <input type="hidden" name="product_id" value="<?php echo $product['productID']; ?>">
                                 <input type="hidden" name="category_id" value="<?php echo $categoryID; ?>">
-                                <button type="submit" class="btn btn-outline-light btn-sm"
+                                <button type="submit" class="btn btn-ghost btn-sm"
                                         aria-label="Delete <?php echo htmlspecialchars($product['productName']); ?>">Delete</button>
                             </form>
                             <a href="shop_edit_form.php?product_id=<?php echo $product['productID']; ?>"

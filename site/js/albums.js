@@ -28,7 +28,11 @@ function showAlbum(albumId) {
 
     target.hidden = false;
     hint.hidden = true;
-    document.querySelector('.album-cover[data-album="' + albumId + '"]').setAttribute('aria-expanded', 'true');
+    // Not every album has a cover button (some have no picture), so check it exists first
+    const cover = document.querySelector('.album-cover[data-album="' + albumId + '"]');
+    if (cover) {
+        cover.setAttribute('aria-expanded', 'true');
+    }
     target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -51,3 +55,12 @@ listLinks.forEach(function (link) {
         }
     });
 });
+
+// ON PAGE LOAD: a link like albums.php#tracks-dsotm opens that album straight away
+// (the home page uses this for its "full tracklist" link).
+if (location.hash.startsWith('#tracks-')) {
+    const albumId = location.hash.replace('#tracks-', '');
+    if (document.getElementById('tracks-' + albumId)) {
+        showAlbum(albumId);
+    }
+}
