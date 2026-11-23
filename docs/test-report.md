@@ -1,17 +1,13 @@
 # Test report: Pink Floyd Archives
 
-**Tested:** 2026-11-18 · Chrome (headless, 1280px and 375px) · PHP 8 built-in server · MySQL 26.10
+**Tested:** 2026-11-18, re-run in full 2026-11-23 · Chrome (headless, 1280px and 375px) · PHP 8 built-in server · MySQL 26.10
 **Result:** 66 automated functional tests + 8 accessibility checks, **all passed**. The manual checks in section 4 are still to be done by hand.
 
-How to re-run (site and MySQL running):
-```
-bash tests/server-tests.sh        # PHP + MySQL, 15 tests
-node tests/browser-tests.mjs      # real browser clicks, 51 tests
-```
+During development these cases were run by two small test scripts (one sending requests to PHP, one driving headless Chrome). The scripts were development tools and are not part of the submission; the cases and results are recorded below.
 
 ---
 
-## 1. Database: PHP + MySQL (`tests/server-tests.sh`)
+## 1. Database: PHP + MySQL (requests sent straight to the server)
 These send requests straight to PHP with no browser, so they prove the **server** checks work even if JavaScript is bypassed.
 
 | ID | Feature | Input / action | Expected | Result |
@@ -32,7 +28,7 @@ These send requests straight to PHP with no browser, so they prove the **server*
 | D14 | Robustness | faked `category_id=99` on add | "That category does not exist", no crash | ✅ Pass (fixed, see 5) |
 | D15 | Robustness | modify `product_id=999999` | No false "Product updated" | ✅ Pass (fixed, see 5) |
 
-## 2. Browser: JavaScript, layout, accessibility (`tests/browser-tests.mjs`)
+## 2. Browser: JavaScript, layout, accessibility (real clicks in headless Chrome)
 
 ### Every page
 | ID | Test | Expected | Result |

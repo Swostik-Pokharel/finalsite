@@ -18,12 +18,8 @@ php -S localhost:8000 -t site
 ```
 Open **http://localhost:8000**. Using XAMPP instead? See [`site/README.md`](site/README.md).
 
-### Run the tests
-```bash
-bash tests/server-tests.sh      # 15 PHP + MySQL tests (curl)
-node tests/browser-tests.mjs    # 51 browser tests in headless Chrome (Node 22+, no npm install)
-```
-Results and the manual checklist are in [`docs/test-report.md`](docs/test-report.md).
+Test cases and results are in [`docs/test-report.md`](docs/test-report.md).
+Where each requirement of the brief is implemented: [`docs/requirements-map.md`](docs/requirements-map.md).
 
 ---
 
@@ -40,7 +36,7 @@ Results and the manual checklist are in [`docs/test-report.md`](docs/test-report
 | **Account** | Sign up / sign in with full JavaScript validation; the header greets you by name |
 
 ### Accessibility and inclusion
-- High-contrast dark theme with amber and blue accents (no red/green pairs)
+- High-contrast dark theme with a pink accent (WCAG AA); colour is never the only signal
 - **Read page aloud** button on every page (Web Speech API, Esc to stop)
 - Meaningful alt text on every image, and a titled video
 - Fully keyboard-usable: skip link, visible focus rings, labelled form fields
@@ -70,15 +66,14 @@ finalsite/
 │   ├── js/                   one script per page + main.js for every page
 │   ├── images/
 │   └── sql/pinkfloyd_archives.sql
-├── tests/                    automated server + browser tests
 ├── docs/
 │   ├── instructions.md       the assignment brief as a checklist
+│   ├── requirements-map.md   each requirement → where and how it is built
 │   ├── test-report.md        test cases and results
 │   ├── report-draft.md       written report (draft)
 │   ├── acknowledgements.md   sources, licences, AI use
 │   ├── contribution.md       contribution statement + work log
 │   ├── cover-page.html       printable A4 cover page
-│   ├── vision.md
 │   └── log.md                build log, session by session
 └── Project-wireframe.zip     approved wireframes
 ```

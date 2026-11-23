@@ -49,3 +49,40 @@ This is the input for the /eod Q&A.
 - Concepts: automated testing (functional, regression), Chrome DevTools Protocol, WCAG contrast formula, foreign-key errors, rowCount vs existence check, Web Speech API utterance queue, relative vs absolute URLs, browser compatibility (regex lookbehind), print media emulation, localStorage + JSON, aria-hidden decorative content.
 - Didn't understand:
 - Next: fill [brackets] in cover page/contribution, add image source URLs in acknowledgements, do manual checks M1–M8 in the test report, rewrite report draft in own words + screenshots, export docs to PDF, zip site/ and submit.
+
+## 2026-11-19: XAMPP / Windows demo risk review
+- Built: docs/xampp-windows-plan.md (what can break on the teacher's Windows + XAMPP, preparation checklist, setup steps). No code changed.
+- Decisions: no code changes needed because paths are relative and includes use `__DIR__`; the real risks are environment ones (DB import as root, MariaDB, port conflicts, htdocs folder depth), so the answer is preparation and testing on Windows, not code.
+- Concepts: relative vs absolute URLs, `__DIR__`, MariaDB vs MySQL, port conflicts (80/3306), table-name case sensitivity on Windows, least-privilege DB user (`pfa_user`), phpMyAdmin import.
+- Didn't understand:
+- Next: test on a Windows + XAMPP machine, expand the XAMPP section of site/README.md, prepare backup screenshots/recording.
+
+## 2026-11-23: expand XAMPP section of README
+- Built: "Running on Windows with XAMPP" section in site/README.md (4 steps + a problem/fix table), taken from docs/xampp-windows-plan.md. No code changed.
+- Decisions: kept it in the README (part of the submission) rather than a separate file; the troubleshooting is a table so the teacher can scan it. Said "contents of the folder" explicitly because the wrong folder depth is the most likely mistake.
+- Concepts: MariaDB vs MySQL, ports (80/3306), PDO DSN port option, `pdo_mysql` extension in php.ini.
+- Didn't understand:
+- Next: test the steps on a real Windows + XAMPP machine (not verified; MariaDB import untested), make backup screenshots/recording, do manual checks M1-M8.
+
+
+## 2026-11-23: final requirements check, repo cleanup, requirements map
+- Built: docs/requirements-map.md (every requirement → file:line and how). Re-checked all brief items against the code; re-ran lint + all 66 tests (all passed) before deleting them.
+- Removed: tests/ (both scripts), docs/vision.md, docs/xampp-windows-plan.md (content now in site/README.md), .DS_Store. Updated README.md, CLAUDE.md and docs/test-report.md so nothing points to deleted files; fixed the stale "amber and blue / no red-green" claim in README.md.
+- Decisions: kept docs/test-report.md because the brief requires a test report with test cases; kept CLAUDE.md, docs/log.md and docs/instructions.md (working files, not in the zip). Deleted scripts are recoverable from commit 4b200ee.
+- Concepts: requirements traceability (requirement → implementation), regression testing before a cleanup.
+- Didn't understand:
+- Next: cover page, contribution report, written report in own words + screenshots, image URLs in acknowledgements, manual checks M1–M8, Windows/XAMPP test, zip site/.
+
+## 2026-11-23: shop Add/Sort links styled as buttons
+- Built: in site/shop.php, "Add product", "Sort A→Z", "Sort Z→A" and "View product list" now look like buttons (Bootstrap `btn` classes), checked against the full brief (docs/full-instructions.txt).
+- Decisions: kept them as `<a>` links, not `<button>`s, because each one just opens a page (GET); only the look changed. The brief says "Add Sneaker button" and "two buttons" for sorting. Add uses the pink accent style because it is the main action.
+- Concepts: link vs button semantics (navigation vs action), Bootstrap button classes.
+- Didn't understand:
+- Next: decide on red/green in the prism strip; rest of the submission list.
+
+## 2026-11-23: "signup crashes the browser" investigation
+- Built: nothing changed in the code.
+- Decisions: the crash happens only in Brave 1.97.57. It works in Firefox, and in Chrome with real typing. macOS crash reports show Brave's main browser process stopping on an internal check, which page JavaScript can't cause (pages run in a separate sandboxed process). The likely trigger is Brave's autofill dropdown on the name/email fields. Kept the `autocomplete` hints because they help users fill forms (accessibility).
+- Concepts: browser multi-process architecture (browser vs renderer process, sandboxing), crash reports (.ips), autocomplete attribute.
+- Didn't understand:
+- Next: demo in Chrome, Safari or Firefox, not Brave.

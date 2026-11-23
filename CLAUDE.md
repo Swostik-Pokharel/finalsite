@@ -12,7 +12,7 @@ Only Categories/Products are in MySQL (merch shop). Login, fan wall and tours ar
   (`--no-defaults` because ~/.my.cnf sets a root password; never read that file)
 - Server: `php -S localhost:8000 -t site`, then open http://localhost:8000
 - Lint: `php -l site/*.php`, `node --check site/js/*.js`
-- Tests: `bash tests/server-tests.sh` (15), `node tests/browser-tests.mjs` (51, headless Chrome via CDP, no npm). Keep docs/test-report.md in sync.
+- Test scripts were deleted 2026-11-23 (recoverable from commit 4b200ee). docs/test-report.md records the 66 cases.
 
 ## Conventions
 - Every page is .php and does `include 'includes/header.php'` / `footer.php`; set `$pageTitle`, `$currentPage`, optional `$pageScript` first.
@@ -23,6 +23,6 @@ Only Categories/Products are in MySQL (merch shop). Login, fan wall and tours ar
 
 ## Docs
 - docs/instructions.md: the assignment brief, condensed (checklist)
-- docs/vision.md: why and what
+- docs/requirements-map.md: each requirement → file and how it is built
 - docs/log.md: session log (append an entry after each task)
 - site/README.md: install/run guide (part of the submission)

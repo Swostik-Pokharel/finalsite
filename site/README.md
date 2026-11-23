@@ -23,6 +23,24 @@ php -S localhost:8000 -t .      # run from inside this folder
 Then open <http://localhost:8000>.
 **XAMPP:** copy this folder into `htdocs/`, then open `http://localhost/<folder-name>/`.
 
+## Running on Windows with XAMPP
+1. Open the XAMPP Control Panel and start **Apache** and **MySQL**.
+2. Open <http://localhost/phpmyadmin>, click **Import**, choose `sql/pinkfloyd_archives.sql`, click **Go**.
+   Do this as the default `root` user with no database selected (the file creates the database and the `pfa_user` account itself).
+3. Copy the **contents** of this folder (not the folder above it) into `C:\xampp\htdocs\pinkfloyd\`.
+4. Open <http://localhost/pinkfloyd/>.
+
+If something goes wrong:
+| Problem | Fix |
+|---|---|
+| Shop says "Shop unavailable" | The SQL was not imported (step 2), or MySQL is not running |
+| Apache will not start (port 80 busy) | Stop IIS/Skype, or change the port in XAMPP Config and add it to the URL, e.g. `localhost:8080/pinkfloyd/` |
+| MySQL will not start (port 3306 busy) | Stop the other MySQL service, or change the port and add `;port=3307` to the DSN in `includes/database.php` |
+| Page not found | The files are one folder too deep: `index.php` must sit directly inside `htdocs\pinkfloyd\` |
+| Shop errors about the driver | Make sure `extension=pdo_mysql` is not commented out in `php.ini` |
+
+XAMPP uses MariaDB instead of MySQL; the SQL file only uses features both support.
+
 ## Pages
 | Page | File | What to try |
 |---|---|---|

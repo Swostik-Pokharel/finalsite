@@ -135,12 +135,14 @@ include 'includes/header.php';
             </table>
         </div>
 
-        <ul class="list-unstyled d-flex flex-wrap gap-3">
-            <li><a href="shop_add_form.php?category_id=<?php echo $categoryID; ?>">➕ Add product</a></li>
-            <li><a href="shop.php?category_id=<?php echo $categoryID; ?>&sort=asc">Sort products A→Z</a></li>
-            <li><a href="shop.php?category_id=<?php echo $categoryID; ?>&sort=desc">Sort products Z→A</a></li>
+        <!-- The brief asks for an Add button and two Sort buttons. They are links (each one just opens a page)
+             styled as buttons with Bootstrap's btn classes, like the Modify button above. -->
+        <ul class="list-unstyled d-flex flex-wrap gap-2">
+            <li><a class="btn btn-accent btn-sm" href="shop_add_form.php?category_id=<?php echo $categoryID; ?>">➕ Add product</a></li>
+            <li><a class="btn btn-ghost btn-sm" href="shop.php?category_id=<?php echo $categoryID; ?>&sort=asc">Sort products A→Z</a></li>
+            <li><a class="btn btn-ghost btn-sm" href="shop.php?category_id=<?php echo $categoryID; ?>&sort=desc">Sort products Z→A</a></li>
             <?php if ($sort !== ''): ?>
-                <li><a href="shop.php?category_id=<?php echo $categoryID; ?>">View product list (unsorted)</a></li>
+                <li><a class="btn btn-ghost btn-sm" href="shop.php?category_id=<?php echo $categoryID; ?>">View product list (unsorted)</a></li>
             <?php endif; ?>
         </ul>
     </section>
